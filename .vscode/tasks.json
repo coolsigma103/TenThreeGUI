@@ -4,10 +4,8 @@
         {
             "label": "build-pybind11",
             "type": "shell",
-            "command": "${command:python.interpreterPath}",
+            "command": "cmake",
             "args": [
-                "-m",
-                "cmake",
                 "--build",
                 "build"
             ],
