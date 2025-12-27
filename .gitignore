@@ -31,6 +31,7 @@
 *.la
 *.a
 *.lib
+*.pyd
 
 # Executables
 *.exe
@@ -39,3 +40,9 @@
 
 # debug information files
 *.dwo
+
+# CMake generated files
+CMakeFiles/
+build/
+.cache/
+.venv/

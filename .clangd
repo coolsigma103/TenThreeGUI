@@ -1,0 +1,30 @@
+CompileFlags:
+  Add:
+    # Disable unused warnings
+    - -Wno-unused-variable
+    - -Wno-unused-function
+    - -Wno-unused-parameter
+    - -Wno-unused-private-field
+    - -Wno-unused-local-typedef
+    - -Wno-unused-const-variable
+    - -Wno-unused-but-set-variable
+
+    # Disable include warnings
+    - -Wno-unused-macros
+    - -Wno-unused-include-directive
+
+    # Optional: reduce general noise
+    - -Wno-missing-field-initializers
+    - -Wno-sign-compare
+    - -Wno-unknown-pragmas
+
+Diagnostics:
+  # Let clangd be quiet unless it's something serious
+  Suppress:
+    - unused-includes
+    - unused-variable
+    - unused-function
+    - unused-parameter
+
+  # Show fewer diagnostics overall
+  UnusedIncludes: None

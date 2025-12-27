@@ -1,0 +1,66 @@
+BasedOnStyle: LLVM
+
+# =========================
+# General formatting
+# =========================
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+ColumnLimit: 80
+
+# =========================
+# Brace style (Allman)
+# =========================
+BreakBeforeBraces: Allman
+
+BraceWrapping:
+  AfterClass: true
+  AfterFunction: true
+  AfterStruct: true
+  AfterEnum: true
+  BeforeElse: true
+  BeforeCatch: true
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+
+# =========================
+# Class formatting
+# =========================
+AccessModifierOffset: -4
+IndentAccessModifiers: false
+
+# =========================
+# Short functions / blocks
+# =========================
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortBlocksOnASingleLine: Always
+
+# =========================
+# Function declarations
+# =========================
+AlwaysBreakAfterReturnType: None
+AlwaysBreakAfterDefinitionReturnType: None
+BreakBeforeParameters: true
+BinPackParameters: false
+
+# =========================
+# Function calls
+# =========================
+BinPackArguments: false
+PenaltyBreakBeforeFirstCallParameter: 0
+AlignAfterOpenBracket: BlockIndent
+
+# =========================
+# Control statements
+# =========================
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+# =========================
+# Spacing
+# =========================
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
