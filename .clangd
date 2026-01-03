@@ -29,6 +29,6 @@ Diagnostics:
   # Show fewer diagnostics overall
   UnusedIncludes: None
 
-CodeCompletion:
+Completion:
   AddIncludes: false
   IncludeInsertion: Never

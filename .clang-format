@@ -1,66 +1,35 @@
-BasedOnStyle: Google
+BasedOnStyle: LLVM
 
-# =========================
-# General formatting
-# =========================
-IndentWidth: 4
-TabWidth: 4
+# Indentation
 UseTab: Never
+IndentWidth: 4
 ContinuationIndentWidth: 4
-ColumnLimit: 80
 
-# =========================
-# Brace style (Allman)
-# =========================
+# Access specifiers
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+
+# Case labels
+IndentCaseLabels: false
+
+# Braces
 BreakBeforeBraces: Allman
-
 BraceWrapping:
   AfterClass: true
+  AfterControlStatement: true
   AfterFunction: true
-  AfterStruct: true
-  AfterEnum: true
-  BeforeElse: true
-  BeforeCatch: true
+  AfterNamespace: true
   SplitEmptyFunction: true
   SplitEmptyRecord: true
   SplitEmptyNamespace: true
 
-# =========================
-# Class formatting
-# =========================
-AccessModifierOffset: -4
-IndentAccessModifiers: false
-
-# =========================
-# Short functions / blocks
-# =========================
-AllowShortFunctionsOnASingleLine: Inline
-AllowShortBlocksOnASingleLine: Always
-
-# =========================
-# Function declarations
-# =========================
-AlwaysBreakAfterReturnType: None
-AlwaysBreakAfterDefinitionReturnType: None
-BreakBeforeParameters: true
-BinPackParameters: false
-
-# =========================
-# Function calls
-# =========================
-BinPackArguments: false
-PenaltyBreakBeforeFirstCallParameter: 0
-AlignAfterOpenBracket: BlockIndent
-
-# =========================
-# Control statements
-# =========================
+# Short statements
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 
-# =========================
-# Spacing
-# =========================
-SpaceBeforeParens: ControlStatements
-SpacesInParentheses: false
-SpacesInSquareBrackets: false
+# Others
+ColumnLimit: 100
+PointerAlignment: Left
+SortIncludes: true
+DerivePointerAlignment: false
+ReflowComments: true
