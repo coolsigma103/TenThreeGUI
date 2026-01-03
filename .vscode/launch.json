@@ -19,12 +19,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "environment": [
-                {
-                    "name": "PYTHONPATH",
-                    "value": "${workspaceFolder}/build:${env:PYTHONPATH}"
-                }
-            ],
+            "environment": [],
             "preLaunchTask": "build-pybind11"
         }
     ]

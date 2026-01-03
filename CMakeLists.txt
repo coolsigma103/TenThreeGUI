@@ -26,7 +26,8 @@ add_library(glad STATIC "${CMAKE_CURRENT_SOURCE_DIR}/glad/glad.c")
 target_include_directories(glad PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Stb
-add_library(stb STATIC "${CMAKE_CURRENT_SOURCE_DIR}/stb/stb_impl.cpp")
+add_library(stb STATIC "${CMAKE_CURRENT_SOURCE_DIR}/stb_impl/stb_impl.cpp")
+target_include_directories(stb PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Sources
 file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
