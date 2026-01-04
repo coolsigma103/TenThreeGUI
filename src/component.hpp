@@ -1,8 +1,9 @@
 #pragma once
 #include "module.hpp"
 
-class Component {
+class Component
+{
 public:
-  Component();
-  ~Component();
+    Component();
+    ~Component();
 };

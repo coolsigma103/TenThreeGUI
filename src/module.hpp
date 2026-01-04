@@ -8,6 +8,7 @@
 
 #include <deque>
 #include <iostream>
+#include <memory>
 #include <queue>
 #include <string>
 #include <vector>
