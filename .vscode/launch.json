@@ -1,26 +1,28 @@
 {
     "configurations": [
         {
-            "name": "Debug pybind11",
-            "type": "cppdbg",
+            "name": "Debug Python file",
+            "type": "debugpy",
             "request": "launch",
+            "program": "test_module.py",
+            "console": "integratedTerminal",
+            "preLaunchTask": "build-pybind11"
+        },
+        {
+            "name": "Attach GDB",
+            "type": "cppdbg",
+            "request": "attach",
             "program": "${command:python.interpreterPath}",
-            "args": [
-                "test_module.py"
-            ],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "externalConsole": false,
+            "processId": "${command:pickProcess}",
             "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
-            ],
-            "environment": [],
-            "preLaunchTask": "build-pybind11"
+            ]
         }
     ]
 }

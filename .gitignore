@@ -42,7 +42,8 @@
 *.dwo
 
 # CMake generated files
-CMakeFiles/
-build/
-.cache/
-.venv/
+CMakeFiles/*
+
+
+build/*
+.cache/*

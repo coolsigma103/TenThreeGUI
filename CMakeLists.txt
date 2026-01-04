@@ -8,17 +8,33 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fno-omit-frame-pointer")
-set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O0 -fno-omit-frame-pointer")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -fno-omit-frame-pointer")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -fno-omit-frame-pointer")
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-project(MyProject VERSION 1.0 LANGUAGES CXX C)
+if(WIN32)
+    set(Python_EXECUTABLE "${CMAKE_CURRENT_SOURCE_DIR}/.venv/Scripts/python.exe")
+else()
+    set(Python_EXECUTABLE "${CMAKE_CURRENT_SOURCE_DIR}/.venv/bin/python")
+endif()
+
+
+project(TenThreeGUI VERSION 1.0 LANGUAGES CXX C)
 
 # Point CMake to your virtual environment
 # Replace the path with your .venv path
 set(Python3_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.venv")
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
-find_package(pybind11 CONFIG REQUIRED)
+
+execute_process(
+    COMMAND "${Python_EXECUTABLE}" -c "import pybind11; print(pybind11.get_cmake_dir())"
+    OUTPUT_VARIABLE pybind11_DIR
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+find_package(pybind11 REQUIRED)
+
+
 find_package(glfw3 CONFIG REQUIRED)
 
 # Glad
@@ -48,3 +64,5 @@ target_include_directories(TTGUI PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
 
 # Precompile pybind11 header
 target_precompile_headers(TTGUI PUBLIC <pybind11/pybind11.h>)
+
+set_target_properties(TTGUI PROPERTIES  LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
