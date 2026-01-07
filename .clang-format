@@ -28,7 +28,7 @@ AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 
 # Others
-ColumnLimit: 100
+ColumnLimit: 80
 PointerAlignment: Left
 SortIncludes: true
 DerivePointerAlignment: false
