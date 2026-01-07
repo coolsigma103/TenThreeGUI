@@ -1,5 +1,6 @@
 #pragma once
 
+#include "application.hpp"
 #include "maths/vector.hpp"
 #include <pybind11/pybind11.h>
 class Frame;

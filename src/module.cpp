@@ -24,8 +24,8 @@ PYBIND11_MODULE(TTGUI, m)
     auto image = py::class_<Image>(assets, "Image");
 
     auto application = py::class_<Application>(m, "Application");
-    auto frame = py::class_<Frame>(m, "Frame");
     auto component = py::class_<Component>(m, "Component");
+    auto frame = py::class_<Frame>(m, "Frame");
 
     // components
     auto panel = py::class_<Panel, Component>(m, "Panel");

@@ -33,5 +33,7 @@ panel = Panel()
 panel.size.x = 20
 panel.size.y = 20
 
+frame1.addComponent(panel)
+
 print(assets.Color(255.0,255.0,0.0,0.0))
 app.run()

@@ -2,6 +2,7 @@
 #include "application.hpp"
 #include "frame.hpp"
 #include "renderer.hpp"
+#include <GLFW/glfw3.h>
 
 Panel::Panel()
 {
@@ -22,7 +23,7 @@ void Panel::render(Frame* frame)
 
     if (it == renderer->shaders.end())
     {
-
+        frame->getApplication()->bindMasterWindow();
         GLuint fragmentShader = Renderer::Program::createShader(
             panelFragmentShaderSource, GL_FRAGMENT_SHADER);
 
@@ -35,6 +36,7 @@ void Panel::render(Frame* frame)
 
         renderer->shaders["panel"] = panelProgram.id;
         it = renderer->shaders.find("panel");
+        glfwMakeContextCurrent(frame->getWindow());
     }
 
     GLuint programID = renderer->shaders.at("panel");

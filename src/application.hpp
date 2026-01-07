@@ -35,6 +35,7 @@ public:
     void run();
 
     Renderer* getRenderer();
+    void bindMasterWindow() { glfwMakeContextCurrent(masterWindow); }
 };
 
 namespace py = pybind11;
