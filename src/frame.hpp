@@ -13,10 +13,9 @@
 
 #include "assets/color.hpp"
 #include "assets/image.hpp"
-#include "maths/vector.hpp"
+#include "component.hpp"
 
 class Application;
-class Component;
 
 class Frame
 {
@@ -83,10 +82,10 @@ public:
     GLFWwindow* getWindow() { return window; }
 };
 
-inline void PY_FRAME_HPP(pybind11::module_& m)
+inline void PY_FRAME_HPP(py::class_<Frame>& frame)
 {
-    pybind11::class_<Frame>(m, "Frame")
-        .def(pybind11::init<Application*, const Vector2&, const std::string&>(),
+    frame
+        .def(py::init<Application*, const Vector2&, const std::string&>(),
              py::arg("app"), py::arg("size") = Vector2(110, 103),
              py::arg("title") = "TenThreeGUI Frame")
         .def("setSize", &Frame::setSize)

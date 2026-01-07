@@ -19,10 +19,9 @@ public:
 
 namespace py = pybind11;
 
-inline void PY_COMPONENT_HPP(py::module_& m)
+inline void PY_COMPONENT_HPP(py::class_<Component>& component)
 {
-    py::class_<Component>(m)
-        .def(py::init<>())
+    component.def(py::init<>())
         .def("update", &Component::update)
         .def("render", &Component::render)
         .def_readwrite("position", &Component::position)

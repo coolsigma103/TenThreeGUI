@@ -28,11 +28,10 @@ private:
     unsigned char* bytes = nullptr;
 };
 
-inline void PY_IMAGE_HPP(py::module_& m)
+inline void PY_IMAGE_HPP(py::class_<Image>& image)
 {
-    py::class_<Image>(m, "Image")
-        .def(py::init<std::string>(), py::arg("filePath"))
+    image.def(py::init<std::string>(), py::arg("filePath"))
         .def("getWidth", &Image::getWidth)
         .def("getHeight", &Image::getHeight)
-        .def("getChannels", &Image::getWidth);
+        .def("getChannels", &Image::getChannels);
 }

@@ -102,11 +102,11 @@ inline Matrix3 Scaling(float sx, float sy)
     m.data[8] = 1;
     return m;
 }
+namespace py = pybind11;
 
-inline void PY_MATRIX_HPP(pybind11::module_& m)
+inline void PY_MATRIX_HPP(py::class_<Matrix3>& matrix3)
 {
-    pybind11::class_<Matrix3>(m, "Matrix3")
-        .def(pybind11::init<>())
+    matrix3.def(pybind11::init<>())
         .def("__add__", &Matrix3::operator+)
         .def("__sub__", &Matrix3::operator-)
         .def("__mul__",
@@ -115,4 +115,4 @@ inline void PY_MATRIX_HPP(pybind11::module_& m)
              [](const Matrix3& m, const Vector3& v) { return m * v; })
         .def("__mul__",
              [](const Matrix3& m, const Vector2& v) { return m * v; });
-}
+} // namespace PY_MATRIX_HPP(py::class_

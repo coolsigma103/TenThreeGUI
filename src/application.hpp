@@ -39,9 +39,7 @@ public:
 
 namespace py = pybind11;
 
-inline void PY_APPLICATION_HPP(py::module_& m)
+inline void PY_APPLICATION_HPP(py::class_<Application>& application)
 {
-    py::class_<Application>(m, "Application")
-        .def(py::init<>())
-        .def("run", &Application::run);
+    application.def(py::init<>()).def("run", &Application::run);
 }

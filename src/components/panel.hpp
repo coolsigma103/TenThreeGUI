@@ -15,9 +15,9 @@ public:
 };
 
 namespace py = pybind11;
-inline void PY_PANEL_HPP(py::module_& m)
+inline void PY_PANEL_HPP(py::class_<Panel, Component>& panel)
 {
-    py::class_<Panel, Component>(m).def(py::init<>());
+    panel.def(py::init<>());
 }
 
 constexpr const char* panelFragmentShaderSource = R"glsl(
