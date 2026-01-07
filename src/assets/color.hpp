@@ -1,8 +1,9 @@
 #pragma once
 
 #include "../maths/vector.hpp"
-#include <pybind11/cast.h>
+#include <exception>
 #include <pybind11/pybind11.h>
+#include <string>
 
 struct Color
 {

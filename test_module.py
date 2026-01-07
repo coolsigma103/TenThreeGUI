@@ -1,4 +1,3 @@
-from TTGUI import Application, Frame, maths
 from TTGUI import *
 import os
 
@@ -24,4 +23,15 @@ frame1.setCloseCallback(closecallbacktest)
 frame2.setCloseCallback(closecallbacktest)
 frame1.setFocusCallback(focuscallbacktest)
 frame2.setFocusCallback(focuscallbacktest)
+
+icon1 = assets.Image("./test_res/example.jpg")
+frame1.setIcon(icon1)
+
+frame1.setBgColor(assets.Color(255.0, 0.0, 0.0))
+
+panel = Panel()
+panel.size.x = 20
+panel.size.y = 20
+
+print(assets.Color(255.0,255.0,0.0,0.0))
 app.run()

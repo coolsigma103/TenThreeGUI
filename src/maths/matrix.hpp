@@ -24,7 +24,8 @@ template <int Rows, int Cols> struct Matrix
     }
 
     template <int OtherCols>
-    Matrix<Rows, OtherCols> operator*(const Matrix<Cols, OtherCols>& other) const
+    Matrix<Rows, OtherCols>
+    operator*(const Matrix<Cols, OtherCols>& other) const
     {
         Matrix<Rows, OtherCols> result;
         for (int i = 0; i < Rows; i++)
@@ -54,13 +55,64 @@ inline Vector3 operator*(const Matrix3& m, const Vector2& v)
                    m.data[6] * v.x + m.data[7] * v.y + m.data[8]);
 }
 
+inline Matrix3 Rotation(float angleRadians)
+{
+    float c = std::cos(angleRadians);
+    float s = std::sin(angleRadians);
+
+    Matrix3 m{};
+    m.data[0] = c;
+    m.data[1] = -s;
+    m.data[2] = 0;
+    m.data[3] = s;
+    m.data[4] = c;
+    m.data[5] = 0;
+    m.data[6] = 0;
+    m.data[7] = 0;
+    m.data[8] = 1;
+    return m;
+}
+
+inline Matrix3 Translation(float tx, float ty)
+{
+    Matrix3 m{};
+    m.data[0] = 1;
+    m.data[1] = 0;
+    m.data[2] = tx;
+    m.data[3] = 0;
+    m.data[4] = 1;
+    m.data[5] = ty;
+    m.data[6] = 0;
+    m.data[7] = 0;
+    m.data[8] = 1;
+    return m;
+}
+
+inline Matrix3 Scaling(float sx, float sy)
+{
+    Matrix3 m{};
+    m.data[0] = sx;
+    m.data[1] = 0;
+    m.data[2] = 0;
+    m.data[3] = 0;
+    m.data[4] = sy;
+    m.data[5] = 0;
+    m.data[6] = 0;
+    m.data[7] = 0;
+    m.data[8] = 1;
+    return m;
+}
+
 inline void PY_MATRIX_HPP(pybind11::module_& m)
 {
     pybind11::class_<Matrix3>(m, "Matrix3")
         .def(pybind11::init<>())
         .def("__add__", &Matrix3::operator+)
         .def("__sub__", &Matrix3::operator-)
-        .def("__mul__", [](const Matrix3& a, const Matrix3& b) { return a * b; })
-        .def("__mul__", [](const Matrix3& m, const Vector3& v) { return m * v; })
-        .def("__mul__", [](const Matrix3& m, const Vector2& v) { return m * v; });
+        .def("__mul__",
+             [](const Matrix3& a, const Matrix3& b) { return a * b; })
+        .def("__mul__",
+             [](const Matrix3& m, const Vector3& v) { return m * v; })
+        .def("__mul__",
+             [](const Matrix3& m, const Vector2& v) { return m * v; });
 }

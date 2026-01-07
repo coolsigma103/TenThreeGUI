@@ -1,8 +1,7 @@
 #include "application.hpp"
 #include "frame.hpp"
-#include <GLFW/glfw3.h>
-#include <stb/stb_include.h>
-#include <stdexcept>
+
+#include "renderer.hpp"
 
 Application::Application()
 {
@@ -24,6 +23,8 @@ Application::Application()
     }
     glfwMakeContextCurrent(masterWindow);
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+
+    renderer = new Renderer();
 }
 Application::~Application()
 {
@@ -32,8 +33,27 @@ Application::~Application()
 }
 void Application::run()
 {
+    float waitTime = 1.0f / 60.0f; // 60 FPS
+    float lastCheck = glfwGetTime();
+
     while (!shouldClose)
     {
+        float currentTime = glfwGetTime();
+        float deltaTime = currentTime - lastCheck;
+
+        if (deltaTime < waitTime) // if frame is faster than 1/60s, sleep
+        {
+            // Sleep for remaining time
+            float sleepTime = waitTime - deltaTime;
+            if (sleepTime > 0.0f)
+                std::this_thread::sleep_for(
+                    std::chrono::duration<float>(sleepTime));
+            currentTime = glfwGetTime(); // recalc after sleep
+            deltaTime = currentTime - lastCheck;
+        }
+
+        lastCheck = currentTime;
+
         std::queue<Frame*> closedFrames;
         glfwPollEvents();
 
@@ -45,10 +65,11 @@ void Application::run()
             }
             else
             {
-                glfwMakeContextCurrent(frame->window);
-                glfwSwapBuffers(frame->window);
+                frame->update();
+                frame->render();
             }
         }
+
         while (!closedFrames.empty())
         {
             Frame* frame = closedFrames.front();
@@ -58,7 +79,10 @@ void Application::run()
                 frames.erase(it);
             delete frame;
         }
+
         if (frames.empty())
             shouldClose = true;
     }
 }
+
+Renderer* Application::getRenderer() { return renderer; }
