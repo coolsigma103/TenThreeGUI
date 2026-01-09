@@ -2,47 +2,38 @@
 #include "application.hpp"
 #include "frame.hpp"
 #include "renderer.hpp"
-#include <GLFW/glfw3.h>
 
 Panel::Panel()
 {
     position = Vector2(0.0f, 0.0f);
-    size = Vector2(1.0f, 1.0f);
+    size = Vector2(100.0f, 100.0f);
     color = Color(255, 255, 255, 1);
 }
-
 Panel::~Panel() {}
 
 void Panel::render(Frame* frame)
 {
-    glfwMakeContextCurrent(frame->getWindow());
-
     Renderer* renderer = frame->getApplication()->getRenderer();
-
-    auto it = renderer->shaders.find("panel");
-
-    if (it == renderer->shaders.end())
+    if (renderer->programs.find("panel") == renderer->programs.end())
     {
+        renderer->programs.emplace("panel", Renderer::Program());
         frame->getApplication()->bindMasterWindow();
-        GLuint fragmentShader = Renderer::Program::createShader(
-            panelFragmentShaderSource, GL_FRAGMENT_SHADER);
-
-        Renderer::Program panelProgram;
-        panelProgram.attachShader(renderer->defaultVertexShader);
-        panelProgram.attachShader(fragmentShader);
-        panelProgram.link();
-
-        glDeleteShader(fragmentShader);
-
-        renderer->shaders["panel"] = panelProgram.id;
-        it = renderer->shaders.find("panel");
-        glfwMakeContextCurrent(frame->getWindow());
+        GLuint fs = Renderer::Program::createShader(panelFragmentShaderSource,
+                                                    GL_FRAGMENT_SHADER);
+        renderer->programs.at("panel").attachShader(
+            renderer->defaultVertexShader);
+        renderer->programs.at("panel").attachShader(fs);
+        renderer->programs.at("panel").link();
+        glDeleteShader(fs);
     }
 
-    GLuint programID = renderer->shaders.at("panel");
-    glUseProgram(programID);
-    GLuint colorLoc = glGetUniformLocation(programID, "panelColor");
-    Vector4 realColor = Color::toPipelineColor(color);
-    glUniform4f(colorLoc, realColor.x, realColor.y, realColor.z, realColor.w);
-    renderer->draw(size, position, nullptr);
+    glfwMakeContextCurrent(frame->getWindow());
+    GLuint pid = renderer->programs.at("panel").id;
+    glUseProgram(pid);
+    Vector4 rc = Color::toPipelineColor(color);
+    glUniform4f(glGetUniformLocation(pid, "panelColor"), rc.x, rc.y, rc.z,
+                rc.w);
+
+    renderer->draw(size, position, frame->getViewportSize(),
+                   frame->getContentScale(), &renderer->programs.at("panel"));
 }

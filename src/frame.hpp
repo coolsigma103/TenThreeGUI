@@ -14,12 +14,15 @@
 #include "assets/color.hpp"
 #include "assets/image.hpp"
 #include "component.hpp"
+#include "maths/vector.hpp"
 
 class Application;
 
 class Frame
 {
     Vector2 size;
+    Vector2 viewportSize;
+    Vector2 contentScale;
     std::string title;
     Color bgColor;
 
@@ -36,6 +39,10 @@ class Frame
     friend void resizeCallback_(GLFWwindow* window, int width, int height);
     friend void closeCallback_(GLFWwindow* window);
     friend void focusCallback_(GLFWwindow* window, int focused);
+    friend void contentScaleCallback_(GLFWwindow* window, float xscale,
+                                      float yscale);
+    friend void viewportSizeCallback_(GLFWwindow* window, int width,
+                                      int height);
     friend void minimizeCallback_(GLFWwindow* window, int iconified);
     friend void maximizeCallback_(GLFWwindow* window, int maximized);
 
@@ -54,6 +61,8 @@ public:
 
     void setSize(const Vector2& newSize);
     Vector2 getSize() const;
+    Vector2 getViewportSize() const { return viewportSize; }
+    Vector2 getContentScale() const { return contentScale; }
 
     void setTitle(const std::string& newTitle);
     std::string getTitle() const;
@@ -61,7 +70,7 @@ public:
     void setBackgroundColor(const Color& color);
     Color getBackgroundColor() const;
 
-    void setIcon(const Image& icon);
+    void setIcon(const Image& image);
 
     void setResizeCallback(py::object callback) { resizeCallback = callback; }
     void setCloseCallback(py::object callback) { closeCallback = callback; }
@@ -102,5 +111,7 @@ inline void PY_FRAME_HPP(py::class_<Frame>& frame)
         .def("setMinimizeCallback", &Frame::setMinimizeCallback)
         .def("setMaximizeCallback", &Frame::setMaximizeCallback)
         .def("addComponent", &Frame::addComponent)
-        .def("removeComponent", &Frame::removeComponent);
+        .def("removeComponent", &Frame::removeComponent)
+        .def("getViewportSize", &Frame::getViewportSize)
+        .def("getContentScale", &Frame::getContentScale);
 }

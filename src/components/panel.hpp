@@ -3,6 +3,7 @@
 #include "../assets/color.hpp"
 #include "../component.hpp"
 #include <pybind11/pybind11.h>
+#include <utility>
 
 class Panel : public Component
 {
@@ -17,7 +18,7 @@ public:
 namespace py = pybind11;
 inline void PY_PANEL_HPP(py::class_<Panel, Component>& panel)
 {
-    panel.def(py::init<>());
+    panel.def(py::init<>()).def_readwrite("color", &Panel::color);
 }
 
 constexpr const char* panelFragmentShaderSource = R"glsl(

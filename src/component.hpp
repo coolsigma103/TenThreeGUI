@@ -12,7 +12,7 @@ public:
     Vector2 size;
 
     Component();
-    ~Component();
+    virtual ~Component();
 
     virtual void update();
     virtual void render(Frame* frame);
