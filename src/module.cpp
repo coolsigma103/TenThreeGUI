@@ -1,9 +1,5 @@
-#include "application.hpp"
 #include "assets/color.hpp"
 #include "assets/image.hpp"
-#include "component.hpp"
-#include "components/panel.hpp"
-#include "frame.hpp"
 #include "maths/matrix.hpp"
 #include "maths/vector.hpp"
 #include <pybind11/pybind11.h>
@@ -23,21 +19,9 @@ PYBIND11_MODULE(TTGUI, m)
     auto color3 = py::class_<Color3, Color>(assets, "Color3");
     auto image = py::class_<Image>(assets, "Image");
 
-    auto application = py::class_<Application>(m, "Application");
-    auto component = py::class_<Component>(m, "Component");
-    auto frame = py::class_<Frame>(m, "Frame");
-
-    // components
-    auto panel = py::class_<Panel, Component>(m, "Panel");
-
     PY_MATRIX_HPP(matrix3);
     PY_VECTOR_HPP(vector2, vector3, vector4);
 
     PY_COLOR_HPP(color, color3);
     PY_IMAGE_HPP(image);
-
-    PY_APPLICATION_HPP(application);
-    PY_COMPONENT_HPP(component);
-    PY_FRAME_HPP(frame);
-    PY_PANEL_HPP(panel);
 }
