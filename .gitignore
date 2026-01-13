@@ -47,3 +47,4 @@ CMakeFiles/*
 
 build/*
 .cache/*
+bin/*
