@@ -12,13 +12,10 @@
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug",
-                "Python_EXECUTABLE": "${sourceDir}/.venv/bin/python3",
-                "Python_ROOT_DIR": "${sourceDir}/.venv"
+                "CMAKE_BUILD_TYPE": "Debug"
             },
             "environment": {
-                "VIRTUAL_ENV": "${sourceDir}/.venv",
-                "PATH": "${sourceDir}/.venv/bin:$penv{PATH}"
+                "PATH": "$penv{PATH}"
             }
         }
     ],
